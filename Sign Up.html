@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #contain{
+            margin-top: 15px;
+            margin-left: 600px;
+            text-align: center;
+            width: 20%;
+            height: 210px;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+
+        .part1{
+            padding-top: 25px;
+            margin-top: 10px;
+        }
+
+        .part1>input{
+            font-size: larger;
+            border-radius: 5px;
+        }
+
+        h1{
+            margin-left: 600px;
+        }
+
+        #contain2{
+            margin-top: 15px;
+            margin-left: 600px;
+            text-align: center;
+            width: 20%;
+            height: 210px;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+
+        .part2{
+            padding-top: 25px;
+            margin-top: 10px;
+        }
+
+        .part2>input{
+            font-size: larger;
+            border-radius: 5px;
+        }
+
+        h3{
+            margin-left: 600px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Sign Up Please... </h1>
+    <div id="contain">
+        <div class="part1">
+            <input id="name" placeholder="Enter your username">
+        </div>
+
+        <div class="part1">
+            <input id="password" type="text" placeholder="Enter your password">
+        </div>
+
+        <div class="part1">
+            <input id="submit" type="submit" value="Signup">
+        </div>
+    </div>
+
+    <h1>Login Please... </h1>
+    <div id="contain2">
+        <div class="part2">
+            <input id="loginName" placeholder="Enter your username">
+        </div>
+
+        <div class="part2">
+            <input id="loginPassword" type="text" placeholder="Enter your password">
+        </div>
+
+        <div class="part2">
+            <input id="loginSubmit" type="submit" value="Login">
+        </div>
+    </div>
+    <h3>Click Hear To....<a href="index.html">Home</a></h3>
+</body>
+</html>
+<script>
+    
+    let userData = JSON.parse(localStorage.getItem("UserData"))
+
+    let name = document.getElementById("name")
+
+    let password = document.getElementById("password")
+
+    let submit = document.getElementById("submit")
+
+    submit.addEventListener("click",function(){
+        let obj = {name:name.value,password: password.value}
+        userData.push(obj)
+        localStorage.setItem("UserData", JSON.stringify(userData))
+        alert("Sign Up Sucessfull...Please Login")
+    })
+    //console.log(userData)
+
+    let loginName = document.getElementById("loginName")
+
+    let loginPassword = document.getElementById("loginPassword")
+
+    let loginSubmit = document.getElementById("loginSubmit")
+
+    loginSubmit.addEventListener("click",function(){
+        let flag = true;
+
+        userData.forEach((el,i)=>{
+            if(el.name == loginName.value){
+                if(el.password == loginPassword.value){
+                    alert("Login Sucessfull")
+                    flag = false
+                }
+                else{
+                    alert("Wrong Password")
+                    flag = false
+                }
+            }
+            
+        })
+
+        if(flag){
+            alert("User Not Found...Please Register")
+        }
+        loginName.value = "";
+        loginPassword.value = "";
+    })
+</script>
